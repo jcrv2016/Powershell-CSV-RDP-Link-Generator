@@ -1,4 +1,5 @@
 ﻿#Import CSV, assign fields to variables, generate .RDP links
+#This contains no exception handling
 
 $ReadPath = Read-Host -Prompt 'Please input path of CSV to import'
 $OutPath = Read-Host -Prompt 'Please output path for RDP links'
@@ -8,9 +9,28 @@ foreach ($User in $Users)
 {   
     $userName = $User.'userName'          
     $hostName = $User.'hostName'            
+  
+
+    if ($User.'remoteGateway')
+    {
     $remoteGateway = $User.'remoteGateway'
+    }
+    else
+    {
+    $remoteGateway = ''
+    }
+
     $domainDNSName = $User.'domainDNSName'
     $domainShortName = $User.'domainShortName'
+
+    if ($User.'promptForBothCredentials' -like '*yes*')
+    {
+    $promptcredentialonce = '0'
+    }
+    else
+    {
+    $promptcredentialonce = '1'
+    }
 #Output RDP link
 $a = @"
 screen mode id:i:2
@@ -54,7 +74,7 @@ gatewayhostname:s:$remoteGateway
 gatewayusagemethod:i:2
 gatewaycredentialssource:i:4
 gatewayprofileusagemethod:i:1
-promptcredentialonce:i:1
+promptcredentialonce:i:$promptcredentialonce
 gatewaybrokeringtype:i:0
 use redirection server name:i:0
 rdgiskdcproxy:i:0

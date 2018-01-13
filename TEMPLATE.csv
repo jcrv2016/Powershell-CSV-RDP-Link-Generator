@@ -1,3 +1,4 @@
-hostName,domainDNSName,domainShortName,userName,remoteGateway
-SAMPLE001,ad.github.com,ad,jsmith,remote.github.com
-SAMPLE001,ad.github.com,ad,cjones,remote.github.com
+hostName,domainDNSName,domainShortName,userName,remoteGateway,promptForBothCredentials
+SAMPLE001,ad.github.com,ad,jsmith,remote.github.com,yes
+SAMPLE002,ad.github.com,ad,cjones,remote.github.com,no
+SAMPLE003,ad.github.com,ad,bmatthews,,
