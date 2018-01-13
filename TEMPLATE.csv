@@ -1,0 +1,3 @@
+hostName,domainDNSName,domainShortName,userName,remoteGateway
+SAMPLE001,ad.github.com,ad,jsmith,remote.github.com
+SAMPLE001,ad.github.com,ad,cjones,remote.github.com
