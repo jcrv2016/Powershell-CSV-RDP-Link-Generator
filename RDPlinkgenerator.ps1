@@ -1,25 +1,23 @@
-﻿#Import CSV, assign fields to variables, generate .RDP links
+#Import CSV, assign fields to variables, generate .RDP links
 #This contains no exception handling
 
 $ReadPath = Read-Host -Prompt 'Please input path of CSV to import'
 $OutPath = Read-Host -Prompt 'Please output path for RDP links'
 $Users = Import-Csv -Path $ReadPath
+$remoteGateway = ''
+$promptcredentialonce = '1'
 #Read in CSV            
 foreach ($User in $Users)            
 {   
     $userName = $User.'userName'          
     $hostName = $User.'hostName'            
   
-
     if ($User.'remoteGateway')
     {
     $remoteGateway = $User.'remoteGateway'
     }
-    else
-    {
-    $remoteGateway = ''
-    }
-
+    #else leave as default value
+  
     $domainDNSName = $User.'domainDNSName'
     $domainShortName = $User.'domainShortName'
 
@@ -27,10 +25,8 @@ foreach ($User in $Users)
     {
     $promptcredentialonce = '0'
     }
-    else
-    {
-    $promptcredentialonce = '1'
-    }
+    #else leave as default value
+   
 #Output RDP link
 $a = @"
 screen mode id:i:2
